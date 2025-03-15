@@ -1,8 +1,8 @@
 from django.urls import path
-from api import views  # Importing the views module
+from .views import document_requirements, common_mistakes, visa_types
 
 urlpatterns = [
-    path('hello/', views.hello_world, name='api-hello'),
-    path('test/', views.test_view, name='api-test'),
-    path('documents/', views.document_requirements, name='api-documents'),
+    path('document-requirements/', document_requirements, name='document-requirements'),
+    path('common-mistakes/', common_mistakes, name='common-mistakes'),
+    path('visa-types/', visa_types, name='visa-types'),
 ]

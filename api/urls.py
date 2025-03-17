@@ -1,25 +1,28 @@
 from django.urls import path
 from .views import (
-    common_mistakes, 
-    visa_types, 
-    visa_rejection_reasons, 
-    emergency_contacts,
-    best_season, 
-    customs_rules,
+    common_mistakes, # X
+    visa_types, # X
+    visa_rejection_reasons, # 1
+    emergency_contacts, # 2
+    best_season, # 3
+    customs_rules, # 4
 
-    required_docs, 
-    check_expiry, 
-    cost_estimate, 
-    document_validation, 
-    missing_docs,
-    smart_expiry_check,
-    budget_breakdown,
-    alternative_docs,
-    visa_processing_time,
-    visa_success_rate,
-    travel_mode_cost,
-    convert_currency,
-    insurance_recommend
+    required_docs, # 5
+    check_expiry, # 6
+    cost_estimate, # 7
+    document_validation, # X
+    missing_docs, # 8 
+    smart_expiry_check, # 9
+    budget_breakdown, # 10
+    alternative_docs, # 11
+    visa_processing_time, # 12
+    visa_success_rate, # 13
+    travel_mode_cost, # 14
+    convert_currency, # 15
+    insurance_recommend # 16
+    #/embassy-location/<country>/ # 18
+    #/flight-tips/ # 19
+    # ????????? # 20
 )
 
 urlpatterns = [

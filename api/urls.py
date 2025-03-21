@@ -1,44 +1,60 @@
-from django.urls import path
-from .views import (
-    common_mistakes, # X
-    visa_types, # X
-    visa_rejection_reasons, # 1
-    emergency_contacts, # 2
-    best_season, # 3
-    customs_rules, # 4
+from django.urls import path, re_path
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
-    required_docs, # 5
-    check_expiry, # 6
-    cost_estimate, # 7
-    document_validation, # X
-    missing_docs, # 8 
-    smart_expiry_check, # 9
-    budget_breakdown, # 10
-    alternative_docs, # 11
-    visa_processing_time, # 12
-    visa_success_rate, # 13
-    travel_mode_cost, # 14
-    convert_currency, # 15
-    insurance_recommend # 16
-    #/embassy-location/<country>/ # 18
-    #/flight-tips/ # 19
-    # ????????? # 20
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Smart Document & Budget Advisor API",
+        default_version='v1',
+        description="API for document verification and budget estimation",
+        terms_of_service="https://www.example.com/terms/",
+        contact=openapi.Contact(email="support@example.com"),
+        license=openapi.License(name="MIT License"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
 )
+
+from .views import (
+    visa_rejection_reasons, # 1
+    best_season, # 2
+    nearest_embassy, # 3
+    flight_tips, # 4
+    
+    customs_rules, # 5
+    emergency_contacts, # 6
+    required_docs, # 7
+    check_expiry, # 8
+    cost_estimate, # 9
+    missing_docs, # 10 
+    smart_expiry_check, # 11
+    budget_breakdown, # 12
+    alternative_docs, # 13
+    visa_processing_time, # 14
+    visa_success_rate, # 15
+    travel_mode_cost, # 16
+    convert_currency, # 17
+    insurance_recommend, # 18
+    packing_checklist, # 19
+    travel_restrictions # 20
+)
+
+
 
 urlpatterns = [
     # GET Endpoints
-    path('common-mistakes/', common_mistakes, name='common-mistakes'),
-    path('visa-types/', visa_types, name='visa-types'),
     path('visa-rejection-reasons/', visa_rejection_reasons, name='visa-rejection-reasons'),
-    path('emergency-contacts/', emergency_contacts, name='emergency-contacts'),
     path('best-season/', best_season, name='best-season'),
-    path('customs-rules/', customs_rules, name='customs-rules'),
+    path('nearest-embassy/', nearest_embassy, name='nearest_embassy'),
+    path('flight-tips/', flight_tips, name='flight_tips'),
 
     # POST Endpoints
+    path('customs-rules/', customs_rules, name='customs-rules'),
+    path('emergency-contacts/', emergency_contacts, name='emergency-contacts'),
     path('required-docs/', required_docs, name='required_docs'),
     path('check-expiry/', check_expiry, name='check-expiry'),
     path('cost-estimate/', cost_estimate, name='cost-estimate'),
-    path('document-validation/', document_validation, name='document-validation'),
     path('missing-docs/', missing_docs, name='missing_docs'),
     path('smart-expiry-check/', smart_expiry_check, name='smart-expiry-check'),
     path('budget-breakdown/', budget_breakdown, name='budget-breakdown'),
@@ -48,5 +64,9 @@ urlpatterns = [
     path('travel-mode-cost/', travel_mode_cost, name='travel-mode-cost'),
     path('convert-currency/', convert_currency, name='convert-currency'),
     path('insurance-recommend/', insurance_recommend, name='insurance-recommend'),
+    path('packing-checklist/', packing_checklist, name='packing-checklist'),
+    path('travel-restrictions/', travel_restrictions, name='travel-restrictions'),
 
+    re_path(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    re_path(r'^redoc/$', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
